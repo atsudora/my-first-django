@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <title>django polls</title>
-        <style>body {padding: 10;}</style>
-    </head>
-    <body>
-        <h1>django html</h1>
-        <p>{{message}}</p>
-        <p>{{article.content}},{{article.user_name}}</p>
-        <a href = '{% url "polls:index" %}'>一覧</a>
-    </body>
-</html>
+{% extends './base.html' %}
+{% block content %}
+    <h1>django html</h1>
+    <p>{{message}}</p>
+    <p>{{article.content}},{{article.user_name}}</p>
+    <a href = '{% url "polls:index" %}' class='btn btn-outline-primary'>一覧</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends './base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <h1>{{message}}</h1>
+    <form action='{% url "polls:create" %}' method='post' class='form'>
+        {% csrf_token %}
+        {% bootstrap_form articleForm layout='horizontal' %}
+        <button type='submit' class='btn btn-outline-primary'>作成する</button>
+        <a href='{% url "polls:index' class='btn btn-outline-secondary'>戻る</a>
+    </form>
+{% endblock %}

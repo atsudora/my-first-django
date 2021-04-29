@@ -1,18 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <title>django polls</title>
-        <style>body {padding: 10;}</style>
-    </head>
-    <body>
-        <h1>django html</h1>
-        <p>{{message}}</p>
+{% extends './base.html' %}
+{% block content %}
+    <h1>bashakaの掲示板</h1>
+    <p>{{ message }}</p>
+    {% if searchForm %}
+    <!-- action:送信先URLの指定 -->
+        <form action='{% url "polls:index" %}' method='get'>
+            <div class='form-group'>
+                {{searchForm}}
+                <input type='submit' class='btn btn-outline-primary' value='OK'>
+                <a href='{% url "polls:index" %}' class='btn btn-outline-secondary'>クリア</a>
+            </div>
+        </form>
+    {% endif %}
+    <table class='table table-striped table-hover'>
         {% for article in articles %}
-            <p>
-                {{article.content}},{{article.user_name}}
-                <a href = '{% url "polls:detail" article.id %}'>詳細</a>
-            </p>
+        <tr>
+            <td>{{article.content}}</td>
+            <td>{{article.user_name}}</td>
+            <td>
+                <a href = '{% url "polls:detail" article.id %}' class='btn btn-outline-primary'>詳細</a>
+                <a href = '{% url "polls:delete" article.id %}' class='btn btn-outline-secondary'>削除</a>
+            </td>
+        </tr>
         {% endfor %}
-    </body>
-</html>
+    </table>
+    <p>
+        <a href='{% url "polls:new" %}' class='btn btn-outline-primary'>新規作成</a>
+    </p>
+{% endblock %}
